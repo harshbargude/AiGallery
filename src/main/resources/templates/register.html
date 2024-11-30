@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+
+<head>
+    <title>Register</title>
+</head>
+
+<body>
+    <div class="parent-fragment" id="content">
+
+        <div class="grid grid-cols-12 pt-4">
+            <div class="sm:col-span-4 md:col-span-4 lg:col-span-4 col-span-4 "></div>
+            <div class="col-span-12 md:col-span-4 lg:col-span-4 ">
+                <!-- message here -->
+                 <div data-th-replace="~{message::messageBox}" class=""></div>
+                <!-- max-w-sm -->
+                <div
+                    class=" dark:border-cyan-900 border-t-4 border-cyan-600 z-10 max-w p-6 bg-gray-50  rounded-lg shadow-2xl dark:bg-gray-800">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">SignUp Here!
+                        </h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Start Managing Contact On Cloud</p>
+
+
+
+                    <form
+                        class="max-w-md mx-auto" 
+                        method="post" 
+                        data-th-action="@{'/do-register'}"
+                        data-th-object="${userForm}"
+                        >
+                        <div class="grid md:grid-cols-1 md:gap-6">
+                            <div class="relative z-0 w-full mb-5 group">
+                                <input 
+                                    type="text" 
+                                    name="name" 
+                                    data-th-field="*{name}" 
+                                    id="name"
+                                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    placeholder=" " required />
+                                    <p 
+                                    data-th-if="${#fields.hasErrors('name')}"
+                                    data-th-errors="*{name}"
+                                    class="text-red-600 pyt-2 font-semibold">User is required..</p>
+                                <label for="name"
+                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                    Name</label>
+                            </div>
+
+                        </div>
+                        <div class="relative z-0 w-full mb-5 group">
+                            <input data-th-field="*{email}"  type="email" name="floating_email" id="floating_email"
+                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                placeholder=" " required />
+                                <p 
+                                    data-th-if="${#fields.hasErrors('email')}"
+                                    data-th-errors="*{email}"
+                                    class="text-red-600 pyt-2 font-semibold"></p>
+                            <label for="floating_email"
+                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email
+                                address</label>
+                        </div>
+                        <div class="relative z-0 w-full mb-5 group">
+                            <input data-th-field="*{password}"  type="password" name="floating_password" id="floating_password"
+                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                placeholder=" " required />
+                                <p 
+                                data-th-if="${#fields.hasErrors('password')}"
+                                data-th-errors="*{password}"
+                                class="text-red-600 pyt-2 font-semibold"></p>
+                            <label for="floating_password"
+                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+                        </div>
+
+
+                        <div class="grid md:grid-cols-1 md:gap-6">
+                            <div class="relative z-0 w-full mb-5 group">
+                                <input data-th-field="*{phoneNumber}"  type="tel" name="floating_phone" id="floating_phone"
+                                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    placeholder=" " required />
+                                    <p 
+                                data-th-if="${#fields.hasErrors('phoneNumber')}"
+                                data-th-errors="*{phoneNumber}"
+                                class="text-red-600 pyt-2 font-semibold"></p>
+                                <label for="floating_phone"
+                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone
+                                    number</label>
+                            </div>
+                        </div>
+                        <div class="relative z-0 w-full mb-5 group">
+
+                            <label for="message"
+                                class="peer-focus:font-medium text-sm text-gray-500 dark:text-gray-400 ">About</label>
+
+                            <textarea data-th-field="*{about}" id="message" rows="4"
+                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Write about You...."></textarea>
+                                <p 
+                                data-th-if="${#fields.hasErrors('about')}"
+                                data-th-errors="*{about}"
+                                class="text-red-600 pyt-2 font-semibold"></p>
+
+                        </div>
+
+                        <div class="flex justify-center gap-3">
+                            <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                            <button type="reset"
+                                class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Form Reset</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <div class="xl:col-span-4"></div>
+        </div>
+
+
+    </div>
+    <script>
+        console.log("About haaa!")
+    </script>
+</body>
+
+</html>

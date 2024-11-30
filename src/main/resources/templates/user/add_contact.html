@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#Hcontent},~{::title},~{::script})}">
+
+<head>
+    <title data-th-text="${loggedInUser.name }  +' | Add Contact'">add contact page</title>
+    <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
+</head>
+
+<body class="dark:bg-black dark:text-white ">
+
+    <div id="Hcontent" >
+        <div>
+            <div th:if="${loggedInUser}">
+                <div data-th-replace="~{user/Sidebar :: sidebar}"></div>
+            </div>
+        </div>
+
+        <div class="p-1  sm:ml-64" style="height: 900px; z-index: 1000" >
+            <div class="grid grid-cols-12">
+                <div class="col-span-3"></div>
+                <div class="col-span-12 md:col-span-6 ">
+                    <div
+                        class="card block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <h3 class="text-2xl font-semibold">Add New Contact</h3>
+                        <p class="text-gray-500">This contact will stored on cloud and you can access from anywhere...
+                        </p>
+                        <form class="mx-auto mt-8">
+                            <label for="name-icon"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <i class="fa-regular fa-user w-4 h-4 text-gray-500 dark:text-gray-400"></i>
+                                </div>
+                                <input type="text" id="name-icon"
+                                    class="bg-gray-50 border z-20 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="name ">
+                            </div>
+
+                            <label for="email-address-icon"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                                        <path
+                                            d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
+                                        <path
+                                            d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
+                                    </svg>
+                                </div>
+                                <input type="text" id="email-address-icon"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="name@flowbite.com">
+                            </div>
+
+                            <label for="phone-number-icon"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
+                                Number</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <i class="fa-solid fa-phone w-4 h-4 text-gray-500 dark:text-gray-400"></i>
+                                </div>
+                                <input type="text" id="phone-number-icon"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="91+ 9999999999">
+                            </div>
+
+                            <label for="address-icon"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                            <div class="relative">
+                                <!-- <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"> -->
+                                <!-- <i class="fa-solid fa-location-dot w-4 h-4 text-gray-500 dark:text-gray-400"></i> -->
+                                <!-- </div> -->
+                                <textarea id="address-icon" rows="4"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Address of the contact..."></textarea>
+                            </div>
+
+                            <label for="description-icon"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact
+                                Description</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <!-- <i class="fa-regular fa-address-card w-4 h-4 text-gray-500 dark:text-gray-400"></i> -->
+                                </div>
+                                <!-- <label for="message"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                                    message</label> -->
+                                <textarea id="description-icon" rows="4"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Add a description about contact..."></textarea>
+                            </div>
+
+
+                            <div class="relative mt-4">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <i class="fa-solid fa-globe w-4 h-4 text-gray-500 dark:text-gray-400"></i>
+                                </div>
+                                <input type="text" id="site-FaceBook-icon"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="https://abct.profile.com ">
+                            </div>
+
+                            <div class="relative mt-4">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <i class="fa-brands fa-linkedin w-4 h-4 text-gray-500 dark:text-gray-400"></i>
+                                </div>
+                                <input type="text" id="site-FaceBook-icon"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="https://linkedin.com ">
+                            </div>
+
+                            <div class="relative mt-4">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <i class="fa-brands fa-instagram w-4 h-4 text-gray-500 dark:text-gray-400"></i>
+                                </div>
+                                <input type="text" id="site-instagram-icon"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="https://instagram.com ">
+                            </div>
+
+
+                            <!-- profile photo uplode file -->
+
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-3"
+                                for="file_input">Upload profile picture</label>
+                            <input
+                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                id="file_input" type="file">
+
+                            <!-- favourite contact -->
+
+                            <div class="flex items-center mb-4 mt-4">
+                                <input id="default-checkbox" type="checkbox" value=""
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="default-checkbox"    
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Favorite
+                                    Contact</label>
+                            </div>        
+
+
+                            <div class="buttoncontainer flex justify-center gap-5">
+                                <button type="submit" class="px-3 rounded text-white py-2  bg-green-600 hover:bg-green-800  ">Add Contact</button>
+                                <button type="reset" class="px-3 rounded text-white py-2  bg-blue-600 hover:bg-blue-800 ">Reset</button>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="p-2 border-2 border-gray-200 border-gray-100 rounded-lg dark:border-gray-700">
+                <div >
+                    <div class="h-48  rounded bg-gray-50 dark:bg-gray-800">
+                        <h1>Welcome to ADD contact page</h1>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <script>
+        console.log("Home page!")
+    </script>
+</body>
+
+</html>

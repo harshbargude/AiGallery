@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#Hcontent},~{::title},~{::script})}">
+
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
+</head>
+
+<body class="dark:bg-black dark:text-white">
+    <div class=" bg-gray-200 dark:bg-gray-800 sm:w-1/2 p-4 mx-auto m-4 space-y-4 items-center dark:shadow-white" id="Hcontent">
+        <h1 class="text-4xl justify-center">Smart Contact Manager</h1>
+        <p> My You Tube <span data-th-href="${githybRepo}"></span></p>
+        <a class="text-xl" data-th-href="${githybRepo}">click here to open GitHub Repo!</a> <br>
+        <a th:href="${githybRepo}">click here to open GitHub Repo!</a>
+        <p class="">
+            Smart Contact Manager is a an Cloud based Contact manager, that stores contact information safely in a secured environment. 
+        </p>
+        <div class="items-center flex justify-center ">
+            <button class="bg-blue-600 px-3 py-1 rounded  hover:bg-red-700">button</button>
+        </div>
+    </div>
+    <script  >
+        console.log("Home page!")
+    </script>
+</body>
+
+</html>

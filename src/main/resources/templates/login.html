@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+
+<head>
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="parent-fragment" id="content">
+
+        <div class="grid grid-cols-12 pt-4">
+            <div class="sm:col-span-4 md:col-span-4 lg:col-span-4 col-span-4 "></div>
+            <div class="col-span-12 md:col-span-4 lg:col-span-4 ">
+                <div data-th-replace="~{message::messageBox}" class=""></div>
+                <div
+                    class=" dark:border-green-600 border-t-4 border-green-500 z-10 max-w p-6 bg-gray-50  rounded-lg shadow-2xl dark:bg-gray-800">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Login Here!
+                        </h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Start Managing Contact On Cloud</p>
+                    <div class="text-red-600 text-center my-3" th:if="${param.error}">
+                        Invalid Username or Password
+                    </div>
+                    <div class="text-green-500 text-center my-3" th:if="${param.logout}">
+                        Yoy have been Logged Out!
+                    </div>
+
+
+                    <form class="max-w-md mx-auto" method="post" data-th-action="@{'/authenticate'}"
+                        data-th-object="${userForm}">
+
+                        <div class="relative z-0 w-full mb-5 group">
+                            <input type="email" name="email" id="email"
+                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                placeholder=" " required />
+                            <p class="text-red-600 pyt-2 font-semibold"></p>
+                            <label for="email"
+                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email
+                                address</label>
+                        </div>
+                        <div class="relative z-0 w-full mb-5 group">
+                            <input type="password" name="password" id="password"
+                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                placeholder=" " required />
+                            <p class="text-red-600 pyt-2 font-semibold"></p>
+                            <label for="password"
+                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+                        </div>
+
+
+
+
+                        <div class="flex justify-center gap-3">
+                            <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
+                            <button type="reset"
+                                class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Form
+                                Reset</button>
+                        </div>
+                    </form>
+                    <h1 class=" flex top-0 items-center justify-center mt-3 ml(50%) dark:bg-gray-800">or</h1>
+                    <div class=" flex top-0 items-center justify-center mt-3 ml(50%) dark:bg-gray-800">
+                        <button
+                            class="px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150">
+                            <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg"
+                                loading="lazy" alt="google logo">
+                <div class="flex  justify-center  dark:bg-gray-800">
+                <div class="flex  justify-center  dark:bg-gray-800">
+                            <a href="/oauth2/authorization/google">Login with Google</a>
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="xl:col-span-4"></div>
+        </div>
+
+
+    </div>
+    <script>
+        console.log("About haaa!")
+    </script>
+</body>
+
+</html>
