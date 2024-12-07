@@ -2,42 +2,63 @@
 <html lang="en" th:replace="~{base :: parent(~{::#Hcontent},~{::title},~{::script})}">
 
 <head>
-    <title data-th-text="${loggedInUser.name }  +' | Add Contact'">add contact page</title>
-    <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
+    <title data-th-text="${loggedInUser.name}  +' | Add Contact'">add contact page</title>
+    <!-- <link rel="stylesheet" data-th-href="@{'/css/output.css'}" /> -->
 </head>
 
 <body class="dark:bg-black dark:text-white ">
 
-    <div id="Hcontent" >
+    <div id="Hcontent">
         <div>
             <div th:if="${loggedInUser}">
                 <div data-th-replace="~{user/Sidebar :: sidebar}"></div>
             </div>
         </div>
 
-        <div class="p-1  sm:ml-64" style="height: 900px; z-index: 1000" >
+        <div class="p-1  sm:ml-64" style="height: 900px; z-index: 1000">
             <div class="grid grid-cols-12">
                 <div class="col-span-3"></div>
                 <div class="col-span-12 md:col-span-6 ">
                     <div
                         class="card block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <!-- message here -->
+                        <div data-th-replace="~{message::messageBox}" class=""></div>
+
                         <h3 class="text-2xl font-semibold">Add New Contact</h3>
                         <p class="text-gray-500">This contact will stored on cloud and you can access from anywhere...
                         </p>
-                        <form class="mx-auto mt-8">
-                            <label for="name-icon"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
+
+                        <!-- FORM -->
+                        <form class="mx-auto mt-8" data-th-action="@{'/user/contacts/add'}"
+                            data-th-object="${contactForm}" method="post" enctype="multipart/form-data">
+
+                            <!-- NAME -->
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full
+                                Name</label>
+                            <!-- validation message -->
+                            <p data-th-if="${#fields.hasErrors('name')}" data-th-errors="*{name}"
+                                class="text-red-600 pyt-2 font-semibold">
+                                contact name is required..
+                            </p>
                             <div class="relative">
+
                                 <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                     <i class="fa-regular fa-user w-4 h-4 text-gray-500 dark:text-gray-400"></i>
                                 </div>
-                                <input type="text" id="name-icon"
+                                <input type="text" data-th-field="*{name}"
                                     class="bg-gray-50 border z-20 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="name ">
+                                    placeholder="name " required>
                             </div>
 
-                            <label for="email-address-icon"
+                            <!-- EMAIL -->
+
+                            <label for="email"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                            <!-- validation message -->
+                            <p data-th-if="${#fields.hasErrors('email')}" data-th-errors="*{email}"
+                                class="text-red-600 pyt-2 font-semibold">
+                                email is required..
+                            </p>
                             <div class="relative">
                                 <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                     <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -48,73 +69,91 @@
                                             d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
                                     </svg>
                                 </div>
-                                <input type="text" id="email-address-icon"
+                                <input type="text" data-th-field="*{email}"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="name@flowbite.com">
+                                    placeholder="name@flowbite.com" required>
                             </div>
 
-                            <label for="phone-number-icon"
+                            <!-- PHONE NUMBER -->
+                            <label for="phoneNumber"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
                                 Number</label>
+                            <!-- validation message -->
+                            <p data-th-if="${#fields.hasErrors('phoneNumber')}" data-th-errors="*{phoneNumber}"
+                                class="text-red-600 pyt-2 font-semibold">
+                                Phone Number is required..
+                            </p>
                             <div class="relative">
                                 <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                     <i class="fa-solid fa-phone w-4 h-4 text-gray-500 dark:text-gray-400"></i>
                                 </div>
-                                <input type="text" id="phone-number-icon"
+                                <input type="text" data-th-field="*{phoneNumber}"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="91+ 9999999999">
+                                    placeholder="91+ 9999999999" required>
                             </div>
 
-                            <label for="address-icon"
+                            <!--ADDRESS-->
+
+                            <label for="address"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                            <!-- validation message -->
+                            <p data-th-if="${#fields.hasErrors('address')}" data-th-errors="*{address}"
+                                class="text-red-600 pyt-2 font-semibold">
+                                address is required..
+                            </p>
                             <div class="relative">
                                 <!-- <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"> -->
                                 <!-- <i class="fa-solid fa-location-dot w-4 h-4 text-gray-500 dark:text-gray-400"></i> -->
                                 <!-- </div> -->
-                                <textarea id="address-icon" rows="4"
+                                <textarea rows="4" data-th-field="*{address}"
                                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Address of the contact..."></textarea>
                             </div>
 
-                            <label for="description-icon"
+                            <!-- description -->
+                            <label for="description"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact
                                 Description</label>
                             <div class="relative">
-                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                    <!-- <i class="fa-regular fa-address-card w-4 h-4 text-gray-500 dark:text-gray-400"></i> -->
-                                </div>
-                                <!-- <label for="message"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                                    message</label> -->
-                                <textarea id="description-icon" rows="4"
+                                <textarea rows="4" data-th-field="*{description}"
                                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Add a description about contact..."></textarea>
                             </div>
 
 
+                            <!-- weblink-->
                             <div class="relative mt-4">
                                 <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                     <i class="fa-solid fa-globe w-4 h-4 text-gray-500 dark:text-gray-400"></i>
                                 </div>
-                                <input type="text" id="site-FaceBook-icon"
+                                <input type="text" data-th-field="*{websiteLink}"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="https://abct.profile.com ">
                             </div>
 
+                            <!-- FaceBook weblink-->
                             <div class="relative mt-4">
                                 <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                     <i class="fa-brands fa-linkedin w-4 h-4 text-gray-500 dark:text-gray-400"></i>
                                 </div>
-                                <input type="text" id="site-FaceBook-icon"
+                                <input type="text" data-th-field="*{LinkedinLink}"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="https://linkedin.com ">
                             </div>
 
+                            <!-- instagram weblink-->
                             <div class="relative mt-4">
                                 <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                    <i class="fa-brands fa-instagram w-4 h-4 text-gray-500 dark:text-gray-400"></i>
+                                    <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-500 dark:group-hover:text-white"
+                                        viewBox="0 0 40.1376 40.137604" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:svg="http://www.w3.org/2000/svg">
+                                        <g transform="translate(-36.771397,-37.548095)">
+                                            <path
+                                                d="m 68.512614,43.613876 a 2.330575,2.330575 0 0 0 -2.330607,2.330607 2.330575,2.330575 0 0 0 2.330607,2.330607 2.330575,2.330575 0 0 0 2.330607,-2.330607 2.330575,2.330575 0 0 0 -2.330607,-2.330607 z m 0,1.149283 a 1.1652875,1.1814705 0 0 1 1.165303,1.181324 1.1652875,1.1814705 0 0 1 -1.165303,1.181323 1.1652875,1.1814705 0 0 1 -1.165304,-1.181323 1.1652875,1.1814705 0 0 1 1.165304,-1.181324 z M 56.839941,48.27509 a 9.3416138,9.3416138 0 0 0 -9.341548,9.342065 9.3416138,9.3416138 0 0 0 9.341548,9.341549 9.3416138,9.3416138 0 0 0 9.342066,-9.341549 9.3416138,9.3416138 0 0 0 -9.342066,-9.342065 z m 0,2.014347 a 7.3274336,7.3274336 0 0 1 7.327719,7.327718 7.3274336,7.3274336 0 0 1 -7.327719,7.327201 7.3274336,7.3274336 0 0 1 -7.327201,-7.327201 7.3274336,7.3274336 0 0 1 7.327201,-7.327718 z M 46.611625,37.548096 c -5.451469,0 -9.840226,4.388757 -9.840226,9.840226 v 20.457149 c 0,5.451469 4.388757,9.840226 9.840226,9.840226 h 20.457149 c 5.45147,0 9.840227,-4.388757 9.840227,-9.840226 V 47.388322 c 0,-5.451469 -4.388757,-9.840226 -9.840227,-9.840226 z m 1.187525,2.330607 h 18.081583 c 4.818396,0 8.697661,3.879265 8.697661,8.69766 v 18.081584 c 0,4.818395 -3.879265,8.697143 -8.697661,8.697143 H 47.79915 c -4.818396,0 -8.697144,-3.878748 -8.697144,-8.697143 V 48.576363 c 0,-4.818395 3.878748,-8.69766 8.697144,-8.69766 z" />
+                                        </g>
+                                    </svg>
                                 </div>
-                                <input type="text" id="site-instagram-icon"
+                                <input type="text" data-th-field="*{instagramLink}"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="https://instagram.com ">
                             </div>
@@ -123,25 +162,35 @@
                             <!-- profile photo uplode file -->
 
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-3"
-                                for="file_input">Upload profile picture</label>
-                            <input
+                                for="profilePicture">Upload profile picture</label>
+                                <p data-th-if="${#fields.hasErrors('contactImage')}" data-th-errors="*{contactImage}"
+                                class="text-red-600 pyt-2 font-semibold">
+                                contact profile is required..
+                            </p>
+                            <input data-th-field="*{contactImage}"
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                id="file_input" type="file">
+                                type="file">
+
+                            <img src="" class="max-w-52 mx-auto rounded shadow-2xl mt-3" id="upload_image_preview"
+                                alt="">
 
                             <!-- favourite contact -->
 
                             <div class="flex items-center mb-4 mt-4">
-                                <input id="default-checkbox" type="checkbox" value=""
+                                <input type="checkbox" data-th-field="*{favorite}"
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="default-checkbox"    
-                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Favorite
-                                    Contact</label>
-                            </div>        
+                                <label for="favorite" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Favorite Contact
+                                </label>
+                            </div>
 
 
-                            <div class="buttoncontainer flex justify-center gap-5">
-                                <button type="submit" class="px-3 rounded text-white py-2  bg-green-600 hover:bg-green-800  ">Add Contact</button>
-                                <button type="reset" class="px-3 rounded text-white py-2  bg-blue-600 hover:bg-blue-800 ">Reset</button>
+                            <div class="buttoncontainer flex justify-center gap-3">
+                                <button type="submit"
+                                    class="px-3 rounded text-white py-1  bg-green-500 hover:bg-green-600  ">Add
+                                    Contact</button>
+                                <button type="reset"
+                                    class="px-3 rounded text-white py-1  bg-blue-600 hover:bg-blue-800 ">Reset</button>
                             </div>
 
 
@@ -159,9 +208,7 @@
         </div>
     </div>
 
-    <script>
-        console.log("Home page!")
-    </script>
+    <script data-th-src="@{'/JS/admin.js'}"></script>
 </body>
 
 </html>

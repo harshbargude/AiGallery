@@ -36,7 +36,7 @@ public class RootController {
         System.out.println(user);
         System.out.println(user.getName());
         System.out.println(user.getEmail());
-        System.out.println(user.getPassword());
+        // System.out.println(user.getPassword());
 
         model.addAttribute("loggedInUser", user); // key-value pair NOTE- this key is used in thym leaf to access model
                                                   // data

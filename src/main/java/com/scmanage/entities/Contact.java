@@ -3,6 +3,8 @@ package com.scmanage.entities;
 import java.util.*;
 // import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,11 +31,13 @@ public class Contact {
     private String address;
     private String picture ;
     private String description;
-    private boolean favorite;
+    private boolean favorite = false;
     private String websiteLink;
     private String instagramLink;
     private String LinkedinLink;
     // private List<SocialLinks> socialLinks = new ArrayList<>();
+
+    private String cloudinaryImagePublicId;
 
     @ManyToOne
     private User user;

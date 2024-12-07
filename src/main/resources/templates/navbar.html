@@ -10,7 +10,10 @@
             <button id="theme_change_button"
                 class="bg-gray-200 dark:bg-gray-200 dark:text-black items-center justify-between hidden w-full md:flex md:w-auto rounded-md p-2 space-x-4">
 
-                <img class="" width="20rem" th:src="@{./svg/circle-half-stroke-solid.svg}" alt="svg">
+                <!-- <img class="" width="20rem" th:src="@{./svg/circle-half-stroke-solid.svg}" alt="svg"> -->
+                <img class="dark:block hidden" width="25" height="25" src="https://img.icons8.com/ios/50/sun.png" alt="sun"/>
+                <img class="dark:hidden" width="25" height="25" src="https://img.icons8.com/ios/50/bright-moon.png" alt="bright-moon"/>
+                
                 <span class="font-semibold">dark</span>
             </button>
             <a data-th-href="@{/login}" type="button"
