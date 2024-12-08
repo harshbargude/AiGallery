@@ -67,7 +67,7 @@ public class ContactController {
         // validate form
         if (bindingResult.hasErrors()) {
 
-            bindingResult.getAllErrors().forEach(error -> logger.info(error.toString()));
+            // bindingResult.getAllErrors().forEach(error -> logger.info(error.toString()));
 
             Message message = Message.builder().content("Enter Contact Details Correctly").type(MessageType.red)
                     .build();
@@ -84,7 +84,7 @@ public class ContactController {
         String filename = UUID.randomUUID().toString();
 
         // Image processing from contact fro
-        logger.info("file Information: {}", contactForm.getContactImage().getOriginalFilename());
+        // logger.info("file Information: {}", contactForm.getContactImage().getOriginalFilename());
         // Uplode karne ka code
         String fileUrl = imageService.uplodeImage(contactForm.getContactImage(), filename);
 
@@ -159,7 +159,7 @@ public class ContactController {
             @RequestParam(value = "sort", defaultValue = "name") String sortingField,
             @RequestParam(value = "order", defaultValue = "asc") String sortDirection,
             Model model, Authentication authentication) {
-        logger.info("field {} keyword {}", field, keyword);
+        // logger.info("field {} keyword {}", field, keyword);
 
 
         var user = userService.getUserByEmail(Helper.getEmailOfLoggedInUser(authentication));

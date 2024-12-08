@@ -70,7 +70,7 @@ public class OAuthAuthenticationSuccessHandler implements AuthenticationSuccessH
                 User user2 = userRepo.findByEmail(email).orElse(null);
                 if(user2 == null) {
                     userRepo.save(user1);
-                    logger.info("User Saved:" + email);
+                    // logger.info("User Saved:" + email);
                 }
 
 

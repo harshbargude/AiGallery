@@ -27,15 +27,15 @@ public class RootController {
         if(authentication == null){
             return;
         }
-        System.out.println("Adding logdin user to the modal");
+        // System.out.println("Adding logdin user to the modal");
         String username = Helper.getEmailOfLoggedInUser(authentication);
-        logger.info("User Logged in: {}", username);
+        // logger.info("User Logged in: {}", username);
 
         // database se data ko fetch: getUser from from database
         User user = userService.getUserByEmail(username);
-        System.out.println(user);
-        System.out.println(user.getName());
-        System.out.println(user.getEmail());
+        // System.out.println(user);
+        // System.out.println(user.getName());
+        // System.out.println(user.getEmail());
         // System.out.println(user.getPassword());
 
         model.addAttribute("loggedInUser", user); // key-value pair NOTE- this key is used in thym leaf to access model

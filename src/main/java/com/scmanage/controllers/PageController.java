@@ -32,7 +32,7 @@ public class PageController {
 
     @RequestMapping("/home")
     public String home(Model model) {
-        System.out.println("Home page handler!");
+        // System.out.println("Home page handler!");
 
         // Sending data to view
         model.addAttribute("name", "harsh");
@@ -44,14 +44,14 @@ public class PageController {
 
     @RequestMapping("/about")
     public String about(Model model) {
-        System.out.println("About page");
+        // System.out.println("About page");
 
         return "about";
     }
 
     @RequestMapping("/services")
     public String services(Model model) {
-        System.out.println("About page");
+        // System.out.println("About page");
 
         return "services";
     }
@@ -80,7 +80,7 @@ public class PageController {
     //  To process register 
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
     public String processRegister(@Valid @ModelAttribute UserForm userForm, BindingResult rBindingResult, HttpSession session) {   //@Valid is uset to validate using jakarka validation
-        System.out.println("form processing batata");
+        // System.out.println("form processing batata");
         // fetch from from
         // User From
         // System.out.println(userForm);
@@ -108,7 +108,7 @@ public class PageController {
         user.setAbout(userForm.getAbout()); // Blank if not using third-party login initially
         user.setEnabled(false); 
         userService.saveUser(user);
-        System.out.println("user saved");
+        // System.out.println("user saved");
 
         // .profilePic("")
         // UserService

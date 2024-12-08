@@ -31,7 +31,7 @@ public class UserController {
 
     @RequestMapping(value = "/dashboard")
     public String userDashboard() {
-        System.out.println("User dashboard");
+        // System.out.println("User dashboard");
         return "user/dashboard";
     }
 

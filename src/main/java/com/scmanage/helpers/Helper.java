@@ -25,13 +25,13 @@ public class Helper {
             if (clientId.equalsIgnoreCase("google")) {
 
                 // sign with google
-                System.out.println("Getting email from google");
+                // System.out.println("Getting email from google");
                 username = oauth2User.getAttribute("email").toString();
 
             } else if (clientId.equalsIgnoreCase("github")) {
 
                 // sign with github
-                System.out.println("Getting email from github");
+                // System.out.println("Getting email from github");
                 // username = oauth2User.getAttribute("email") != null ? oauth2User.getAttribute("email").toString()
                 //         : oauth2User.getAttribute("login").toString() + "@gmail.com";
             }
@@ -40,7 +40,7 @@ public class Helper {
             return username;
 
         } else {
-            System.out.println("Getting data from local database");
+            // System.out.println("Getting data from local database");
             return authentication.getName();
         }
 
