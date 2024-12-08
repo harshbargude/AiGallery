@@ -111,7 +111,7 @@ public class ContactController {
         session.setAttribute("message", message);
         // User
 
-        return "redirect:user/contacts/add";
+        return "redirect:/user/contacts/add";
     }
 
     int previous = 0;
