@@ -21,6 +21,6 @@ WORKDIR /app
 #copy the build JAR file from the build stage
 COPY --from=build /app/target/smartcontactmanager-0.0.1-SNAPSHOT.jar .
 
-EXPOSE 8080
+EXPOSE 8081
 
 ENTRYPOINT ["java","-jar","/app/smartcontactmanager-0.0.1-SNAPSHOT.jar"]
