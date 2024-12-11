@@ -179,4 +179,13 @@ public class ContactController {
 
     }
 
+
+    @RequestMapping("/delete/{ContactId}")
+    public String deleteContact(@PathVariable String ContactId) {
+        // logger.info("delete id {}", ContactId);
+        contactService.DeleteContact(ContactId);
+        return "redirect:/user/contacts";
+    }   
+    
+
 }

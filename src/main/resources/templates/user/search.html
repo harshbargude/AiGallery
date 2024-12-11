@@ -100,13 +100,13 @@
 
                                 </td>
                                 <td class="px-6 py-4 ">
-                                    <a href="#"
+                                    <a data-th-href="@{'/user/contacts/delete/'+ *{id}}"
                                         class=" mx-1 w-6 h-6 font-medium text-gray-700 dark:text-gray-100 hover:underline"><i
                                             class="fa-solid fa-trash"></i></a>
                                     <a href="#"
                                         class="  mx-1 w-6 h-6 font-medium text-gray-700 dark:text-gray-100 hover:underline"><i
                                             class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="#"
+                                    <a th:onclick="lodeContactData([[${c.id}]]);" 
                                         class=" mx-1 w-6 h-6 font-medium text-gray-700 dark:text-gray-100 hover:underline"><i
                                             class="fa-solid fa-eye"></i></a>
                                 </td>
@@ -142,11 +142,16 @@
                     </div>
                 </div>
             </div>
+            
+            <div data-th-replace="~{user/contact_model_view :: contact_view_fragment}"></div>
+
         </div>
     </div>
 
+    
+    <script data-th-src="@{'/JS/contacts.js'}"></script>
     <script>
-        console.log("Home page!")
+        console.log("Contact search page!")
     </script>
 </body>
 
