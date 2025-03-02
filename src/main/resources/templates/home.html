@@ -1,27 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base :: parent(~{::#Hcontent},~{::title},~{::script})}">
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Home</title>
-    <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
+    <link data-th-href="@{'/css/output.css'}" rel="stylesheet"/>
 </head>
 
 <body class="dark:bg-black dark:text-white">
-    <div class=" bg-gray-200 dark:bg-gray-800 sm:w-1/2 p-4 mx-auto m-4 space-y-4 items-center dark:shadow-white" id="Hcontent">
-        <h1 class="text-4xl justify-center">Smart Contact Manager</h1>
-        <p> My You Tube <span data-th-href="${githybRepo}"></span></p>
-        <a class="text-xl" data-th-href="${githybRepo}">click here to open GitHub Repo!</a> <br>
-        <a th:href="${githybRepo}">click here to open GitHub Repo!</a>
-        <p class="">
-            Smart Contact Manager is a an Cloud based Contact manager, that stores contact information safely in a secured environment. 
-        </p>
-        <!-- <div class="items-center flex justify-center ">
-            <button class="bg-blue-600 px-3 py-1 rounded  hover:bg-red-700">button</button>
-        </div> -->
-    </div>
-    <script  >
-        console.log("Home page!")
-    </script>
+<div class=" bg-gray-200 dark:bg-gray-800 sm:w-1/2 p-4 mx-auto m-4 space-y-4 items-center dark:shadow-white"
+     id="content">
+    <!-- Hero Section -->
+    <header class="bg-gray-50 dark:bg-gray-700 text-center py-20">
+        <h1 class="text-5xl font-bold">Explore the World of AI-Generated Art</h1>
+        <p class="mt-4 mb-5 text-lg">Discover unique and captivating images created by artificial intelligence.</p>
+        <a class="mt-6 px-8 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700" href="#">Get Started</a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <section class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8" id="Hcontent">
+            <h2 class="text-3xl font-semibold">AI Image Gallery</h2>
+            <p class="mt-4 text-lg">Welcome to the AI Artistry Gallery, where creativity meets technology. Browse
+                through our collection of AI-generated images and be inspired by the endless possibilities.</p>
+        </section>
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Add your image cards here -->
+            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+                <img alt="AI Art" class="w-full h-48 object-cover" src="path/to/your-image.jpg">
+                <div class="p-4">
+                    <h3 class="text-xl font-bold">Title of Image</h3>
+                    <p class="mt-2 text-gray-600 dark:text-gray-400">Short description of the image.</p>
+                </div>
+            </div>
+            <!-- Repeat image card for more images -->
+        </section>
+    </main>
+</div>
+<script>
+    console.log("Home page!")
+</script>
 </body>
 
 </html>

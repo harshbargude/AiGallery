@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon"
-        data-th-href="@{'https://res.cloudinary.com/dr51duewu/image/upload/v1733159154/gls1sp9xq9avle07smwl.svg'}">
+    <link rel="shortcut icon" class="rounded-t-full"
+        data-th-href="@{'https://res.cloudinary.com/dr51duewu/image/upload/v1738515960/hxrtrsu8cjnhbqw3ly4l.jpg'}">
 
     <!-- <img
                data-th-src="@{'https://res.cloudinary.com/dr51duewu/image/upload/v1733159154/gls1sp9xq9avle07smwl.svg'}"
@@ -22,24 +22,17 @@
     <!-- Common header -->
     <!-- if user is logged in then  -->
     <div th:if="${loggedInUser}">
-        <div class="p-4 min-h-screen w-full pt-24 pb-64">
-            <section data-th-replace="${content}"></section>
+        <div class="p-4 w-full pt-24 pb-64">
+            <section class="h-full" data-th-replace="${content}"></section>
         </div>
         <div data-th-replace="~{user/user_navbar::user_navbar}"></div>
 
     </div>
 
-
-    <!-- logged in sidebar 
-     <div th:if="${loggedInUser}">
-        <div  data-th-replace="~{user/Sidebar :: sidebar}"></div>
-     </div> -->
-
-
     <!-- if user is not logged in navbar -->
     <div th:unless="${loggedInUser}">
         <div data-th-replace="~{navbar::navbar}"></div>
-        <div class="p-4 h-screen w-full ">
+        <div class="box-border p-4  w-full ">
             <section data-th-replace="${content}"></section>
         </div>
     </div>
@@ -67,14 +60,14 @@
         </footer>
     </div>
     <div th:unless="${loggedInUser}">
-        <footer class="m-0 p-5 mb-0 dark:bg-blue-900 bg-indigo-50 ">
+        <footer class="m-0 p-5 mb-0 bottom-0 dark:bg-blue-900 bg-indigo-50 ">
 
             <div class=" ">
                 <div class="p-2">
                     <div>
                         <div class="flex items-center flex-col justify-center  rounded ">
                             <div class="">
-                                <h1>© 2025 SCM™. All Rights Reserved.</h1>
+                                <h1>© 2025 AI Gallery. All Rights Reserved.</h1>
                             </div>
                             <div class="">
                                 <h2>Harsh Bargude | Made with ❤ In INDIA</h2>

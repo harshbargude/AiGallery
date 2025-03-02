@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <div class="parent-fragment" id="content">
+    <div class="parent-fragment h-screen" id="content">
 
         <div class="grid grid-cols-12 pt-4">
             <div class="sm:col-span-4 md:col-span-4 lg:col-span-4 col-span-4 "></div>
@@ -18,7 +18,7 @@
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Login Here!
                         </h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Start Managing Contact On Cloud</p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Start Drawing Imagination!</p>
                     <div class="text-red-600 text-center my-3" th:if="${param.error}">
                         Invalid Username or Password
                     </div>
@@ -27,11 +27,11 @@
                     </div>
 
 
-                    <form class="max-w-md mx-auto" method="post" data-th-action="@{'/authenticate'}"
-                        data-th-object="${userForm}">
+                    <form class="max-w-md mx-auto" method="post" data-th-action="@{/authenticateTheUser}"
+                        data-th-object="${loginForm}" novalidate>
 
                         <div class="relative z-0 w-full mb-5 group">
-                            <input type="email" name="email" id="email"
+                            <input type="email" data-th-field="*{email}" name="email" id="email"
                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                 placeholder=" " required />
                             <p class="text-red-600 pyt-2 font-semibold"></p>
@@ -40,7 +40,7 @@
                                 address</label>
                         </div>
                         <div class="relative z-0 w-full mb-5 group">
-                            <input type="password" name="password" id="password"
+                            <input type="password" data-th-field="*{password}" name="password" id="password"
                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                 placeholder=" " required />
                             <p class="text-red-600 pyt-2 font-semibold"></p>
