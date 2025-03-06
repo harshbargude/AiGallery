@@ -6,57 +6,72 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityDeMain {
 
-    @Bean
-    public UserDetailsManager userDetailsManager(DataSource dataSource) {
-        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-        // Queruy to retrive user name and password In main
-        jdbcUserDetailsManager
-                .setUsersByUsernameQuery("select name, password, enabled from users where id=?");
+        @Bean
+        public UserDetailsManager userDetailsManager(DataSource dataSource) {
+                JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
-        jdbcUserDetailsManager
-                .setAuthoritiesByUsernameQuery("select id, role from users where email=?");
+                jdbcUserDetailsManager
+                                .setUsersByUsernameQuery(
+                                                "SELECT email AS username, password, enabled FROM user WHERE email=?");
 
-        // jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
-        //     "SELECT email, CONCAT('ROLE_', role) FROM users WHERE email=?"
-        // );
+                jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+                                "SELECT u.email AS username, r.role " +
+                                                "FROM users_roles ur " +
+                                                "JOIN user u ON ur.user_id = u.id " +
+                                                "JOIN role r ON ur.role_id = r.id " +
+                                                "WHERE u.email=?");
+                return jdbcUserDetailsManager;
+        }
 
-        return jdbcUserDetailsManager;
-    }
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+                http
+                                .authorizeHttpRequests(configerer -> configerer
+                                                .requestMatchers("/css/**",
+                                                                "/registration",
+                                                                "/js/**",
+                                                                "/JS/**",
+                                                                "/home",
+                                                                "/about",
+                                                                "/services",
+                                                                "/contact",
+                                                                "/images/**")
+                                                .permitAll() // Allow static resources
+                                                .requestMatchers(HttpMethod.GET, "/user").hasRole("USER")
+                                                .anyRequest()
+                                                .authenticated())
+                                .formLogin(form -> form
+                                                .loginPage("/login")
+                                                .loginProcessingUrl("/authenticateTheUser")
+                                                .defaultSuccessUrl("/user", true)
+                                                .permitAll())
+                                .logout(logout -> logout
+                                                .invalidateHttpSession(true)
+                                                .clearAuthentication(true)
+                                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                                .logoutSuccessUrl("/login?logout")
+                                                .permitAll())
 
-        http
-                .authorizeHttpRequests(configerer -> configerer
-                        .requestMatchers("/css/**", "/register-user" , "/authenticate").permitAll() // Allow static resources
-                        .requestMatchers("/JS/**").permitAll() // Allow static resources
-                        .requestMatchers("/home").permitAll() // Allow static resources
-                        .requestMatchers("/about").permitAll() // Allow static resources
-                        .requestMatchers("/services").permitAll() // Allow static resources
-                        .requestMatchers("/contact").permitAll() // Allow static resources
-                        .requestMatchers("/register").permitAll() // Allow static resources
-                        .requestMatchers(HttpMethod.GET, "/user").hasRole("USER")
-                        .anyRequest()
-                        .authenticated())
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .loginProcessingUrl("/authenticateTheUser")
-                        .successForwardUrl("/user")
-                        .permitAll())
-                .logout(logout -> logout.permitAll())
+                                .exceptionHandling(configurer -> configurer
+                                                .accessDeniedPage("/access-denied"));
 
-                .exceptionHandling(configurer -> configurer
-                        .accessDeniedPage("/access-denied"));
+                return http.build();
 
-        return http.build();
-
-    }
+        }
 }

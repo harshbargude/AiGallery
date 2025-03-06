@@ -11,7 +11,6 @@
         <div class="grid grid-cols-12 pt-4">
             <div class="sm:col-span-4 md:col-span-4 lg:col-span-4 col-span-4 "></div>
             <div class="col-span-12 md:col-span-4 lg:col-span-4 ">
-                <div data-th-replace="~{message::messageBox}" class=""></div>
                 <div
                     class=" dark:border-green-600 border-t-4 border-green-500 z-10 max-w p-6 bg-gray-50  rounded-lg shadow-2xl dark:bg-gray-800">
                     <a href="#">
@@ -27,11 +26,10 @@
                     </div>
 
 
-                    <form class="max-w-md mx-auto" method="post" data-th-action="@{/authenticateTheUser}"
-                        data-th-object="${loginForm}" novalidate>
-
+                    <form class="max-w-md mx-auto" th:action="@{/authenticateTheUser}" method="POST">
+                        
                         <div class="relative z-0 w-full mb-5 group">
-                            <input type="email" data-th-field="*{email}" name="email" id="email"
+                            <input type="email" name="username" id="email"
                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                 placeholder=" " required />
                             <p class="text-red-600 pyt-2 font-semibold"></p>
@@ -40,7 +38,7 @@
                                 address</label>
                         </div>
                         <div class="relative z-0 w-full mb-5 group">
-                            <input type="password" data-th-field="*{password}" name="password" id="password"
+                            <input type="password" name="password" id="password"
                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                 placeholder=" " required />
                             <p class="text-red-600 pyt-2 font-semibold"></p>

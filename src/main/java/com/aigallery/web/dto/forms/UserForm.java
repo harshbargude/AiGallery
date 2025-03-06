@@ -1,4 +1,4 @@
-package com.aigallery.forms;
+package com.aigallery.web.dto.forms;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -20,7 +20,11 @@ public class UserForm {
 
     @NotBlank(message = "User name is required..")
     @Size(min=3 ,message = "Min 3 characters are required")
-    public String name;
+    public String firstName;
+
+    @NotBlank(message = "User name is required..")
+    @Size(min=3 ,message = "Min 3 characters are required")
+    public String lastName;
 
     @Email(message = "Invalid email address")
     @NotBlank(message ="Email required.")

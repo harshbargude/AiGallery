@@ -12,26 +12,25 @@
      id="content">
     <!-- Hero Section -->
     <header class="bg-gray-50 dark:bg-gray-700 text-center py-20">
-        <h1 class="text-5xl font-bold">Explore the World of AI-Generated Art</h1>
+        <h1 class="text-5xl font-bold">Create the World of AI-Generated Art</h1>
         <p class="mt-4 mb-5 text-lg">Discover unique and captivating images created by artificial intelligence.</p>
-        <a class="mt-6 px-8 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700" href="#">Get Started</a>
+        <a class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-xl px-5 py-2.5 text-center me-2 mb-2 " data-th-href="@{/login}">Lets create</a>
     </header>
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <section class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8" id="Hcontent">
+        <section class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium text-sm px-5 py-2.5 text-center me-2 " id="Hcontent">
             <h2 class="text-3xl font-semibold">AI Image Gallery</h2>
-            <p class="mt-4 text-lg">Welcome to the AI Artistry Gallery, where creativity meets technology. Browse
-                through our collection of AI-generated images and be inspired by the endless possibilities.</p>
+            <p class="mt-4 text-lg">Welcome to the AI Artistry Gallery, where creativity meets technology. Generate highly detailed AI images. <br> Turn imagination into reality.</p>
         </section>
 
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Add your image cards here -->
             <div class="bg-gray-100 dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
-                <img alt="AI Art" class="w-full h-48 object-cover" src="path/to/your-image.jpg">
+                <img alt="AI Art" class="w-full h-48 object-cover" th:src="@{/images/show_img.jpg}">
                 <div class="p-4">
-                    <h3 class="text-xl font-bold">Title of Image</h3>
-                    <p class="mt-2 text-gray-600 dark:text-gray-400">Short description of the image.</p>
+                    <h3 class="text-xl font-bold">Funny coconut cartoon on beach</h3>
+                    <p class="mt-2 text-gray-600 dark:text-gray-400">Above image was generated on prompt "A funny cartoon like coconut on beach in sunny day."</p>
                 </div>
             </div>
             <!-- Repeat image card for more images -->

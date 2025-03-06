@@ -27,35 +27,43 @@
                     <form 
                     class="max-w-md mx-auto" 
                     method="post" 
-                    data-th-action="@{'/register-user'}"  
+                    data-th-action="@{'/registration'}"  
                     data-th-object="${userForm}" 
                     novalidate>
-                    <!-- url in data-th-action -->
-                    
-                        <div class="grid md:grid-cols-1 md:gap-6">
-
                             <div class="relative z-0 w-full mb-5 group">
-                                <input type="text" data-th-field="*{name}"
+                                <input type="text" data-th-field="*{firstName}"
                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                    placeholder=" " required />
+                                    placeholder="" required />
 
-                                <p data-th-if="${#fields.hasErrors('name')}" data-th-errors="*{name}"
+                                <p data-th-if="${#fields.hasErrors('firstName')}" data-th-errors="*{name}"
                                     class="text-red-600 pyt-2 font-semibold">
-                                    User is required..
+                                    first name is required..
                                 </p>
 
                                 <label
-                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                    Name
+                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First Name
                                 </label>
                             </div>
 
-                        </div>
+                            <div class="relative z-0 w-full mb-5 group">
+                                <input type="text" data-th-field="*{lastName}"
+                                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    placeholder="" required />
+
+                                <p data-th-if="${#fields.hasErrors('firstName')}" data-th-errors="*{name}"
+                                    class="text-red-600 pyt-2 font-semibold">
+                                    last name is required..
+                                </p>
+
+                                <label
+                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last Name
+                                </label>
+                            </div>
 
                         <div class="relative z-0 w-full mb-5 group">
                             <input data-th-field="*{email}" type="email" name="floating_email" id="floating_email"
                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                placeholder=" " required />
+                                placeholder="" required />
 
                             <p data-th-if="${#fields.hasErrors('email')}" data-th-errors="*{email}"
                                 class="text-red-600 pyt-2 font-semibold"></p>
