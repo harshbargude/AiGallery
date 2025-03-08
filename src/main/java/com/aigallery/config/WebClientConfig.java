@@ -18,7 +18,7 @@ public class WebClientConfig {
                 .baseUrl("https://image.pollinations.ai")
                 .clientConnector(new ReactorClientHttpConnector(httpClient))
                 .codecs(configurer -> {
-                    // Increase buffer limit to 10MB (or adjust as needed)
+                    // Increase buffer limit to 10MB
                     configurer.defaultCodecs().maxInMemorySize(10 * 1024 * 1024); // 10MB
                 })
                 .build();
