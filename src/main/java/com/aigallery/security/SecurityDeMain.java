@@ -27,12 +27,12 @@ public class SecurityDeMain {
 
                 jdbcUserDetailsManager
                                 .setUsersByUsernameQuery(
-                                                "SELECT email AS username, password, enabled FROM user WHERE email=?");
+                                                "SELECT email AS username, password, enabled FROM users WHERE email=?");
 
                 jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
                                 "SELECT u.email AS username, r.role " +
                                                 "FROM users_roles ur " +
-                                                "JOIN user u ON ur.user_id = u.id " +
+                                                "JOIN users u ON ur.user_id = u.id " +
                                                 "JOIN role r ON ur.role_id = r.id " +
                                                 "WHERE u.email=?");
                 return jdbcUserDetailsManager;

@@ -17,12 +17,20 @@ public class Role {
 
     private String role;
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public Role(){
         
     }
 
-    public Role(String name) {
-        this.role = name;
+    public Role(String role) {
+        this.role = role;
     }
     
     public long getId() {
@@ -31,11 +39,6 @@ public class Role {
     public void setId(long id) {
         this.id = id;
     }
-    public String getName() {
-        return role;
-    }
-    public void setName(String name) {
-        this.role = name;
-    }
+    
     
 }
