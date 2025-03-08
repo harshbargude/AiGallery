@@ -45,6 +45,7 @@ public class SecurityDeMain {
                                 .authorizeHttpRequests(configerer -> configerer
                                                 .requestMatchers("/css/**",
                                                                 "/registration",
+                                                                "/error/**",
                                                                 "/js/**",
                                                                 "/JS/**",
                                                                 "/home",
@@ -53,13 +54,14 @@ public class SecurityDeMain {
                                                                 "/contact",
                                                                 "/images/**")
                                                 .permitAll() // Allow static resources
-                                                .requestMatchers(HttpMethod.GET, "/user").hasRole("USER")
+                                                .requestMatchers(HttpMethod.GET, "/aigallery/**").hasRole("USER")
+                                                .requestMatchers(HttpMethod.GET, "/aigallery/user/**").hasRole("USER")
                                                 .anyRequest()
                                                 .authenticated())
                                 .formLogin(form -> form
                                                 .loginPage("/login")
                                                 .loginProcessingUrl("/authenticateTheUser")
-                                                .defaultSuccessUrl("/user", true)
+                                                .defaultSuccessUrl("/aigallery/user", true)
                                                 .permitAll())
                                 .logout(logout -> logout
                                                 .invalidateHttpSession(true)

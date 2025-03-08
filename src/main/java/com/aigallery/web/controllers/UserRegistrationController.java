@@ -47,8 +47,8 @@ public class UserRegistrationController {
         // add message
         Message message = Message.builder().content("Registration Successful").type(MessageType.green).build();
         httpSession.setAttribute("message", message);
-        System.out.println("UserForm data: " + userForm.toString());
-        return "redirect:/login";
+//        System.out.println("UserForm data: " + userForm.toString());
+        return "redirect:/register";
     }
 
 }

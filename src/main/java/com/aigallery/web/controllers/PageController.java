@@ -65,6 +65,7 @@ public class PageController {
     }
 
 
+
     // @PostMapping("/authenticate")
     // public String authenticate(@ModelAttribute LoginForm loginForm,BindingResult theBindingResult, HttpSession httpSession) {
     //     if(theBindingResult.hasErrors()){

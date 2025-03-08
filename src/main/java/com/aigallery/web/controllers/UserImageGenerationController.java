@@ -18,13 +18,13 @@ import com.aigallery.services.ImageGenerationService;
 
 
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/aigallery/user")
+public class UserImageGenerationController {
     private UserRepo userRepository;
     private GeneratedImageRepository imageRepository;
     private ImageGenerationService imageGenerationService;
 
-    public UserController(UserRepo userRepository, GeneratedImageRepository imageRepository, ImageGenerationService imageGenerationService) {
+    public UserImageGenerationController(UserRepo userRepository, GeneratedImageRepository imageRepository, ImageGenerationService imageGenerationService) {
         this.imageGenerationService = imageGenerationService;
         this.userRepository = userRepository;
         this.imageRepository = imageRepository;
@@ -64,7 +64,7 @@ public class UserController {
         generatedImage.setUser(user);
         
         imageRepository.save(generatedImage);
-        return "redirect:/user";
+        return "redirect:/aigallery/user";
     }
     
 }
