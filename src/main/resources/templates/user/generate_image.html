@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+    xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>generate Image</title>
+</head>
+
+<body>
+    <div class="parent-fragment min-h-screen max-h-full" id="content">
+        <div>
+            <div sec:authorize="isAuthenticated()">
+                <div data-th-replace="~{user/sidebar :: f-sidebar}"></div>
+            </div>
+        </div>
+        <!-- GENERATE IMAGES -->
+        <div class="container max-w-7xl mx-auto mt-6 px-4">
+            <!-- Form Card -->
+            <div class="bg-white p-6 rounded-lg shadow mb-6">
+                <h2 class="text-xl font-semibold mb-4">Generate AI Image</h2>
+                <form th:action="@{/aigallery/user/generate}" th:object="${imageRequest}" method="post"
+                    class="space-y-4">
+                    <div>
+                        <label for="prompt" class="block text-sm font-medium text-gray-700">Prompt</label>
+                        <input type="text" id="prompt" th:field="*{prompt}"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                            placeholder="e.g., A futuristic car in space" />
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="model" class="block text-sm font-medium text-gray-700">Model</label>
+                            <select id="model" th:field="*{model}"
+                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="flux">Flux</option>
+                                <option value="turbo">Turbo</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="seed" class="block text-sm font-medium text-gray-700">Seed (optional)</label>
+                            <input type="number" id="seed" th:field="*{seed}"
+                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <label for="dimensions" class="block text-sm font-medium text-gray-700">Select
+                            Dimensions</label>
+                        <select id="dimensions"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                            onchange="updateDimensions()">
+
+                            <!-- Standard Aspect Ratios & Resolutions -->
+                            <optgroup label="📏 Standard Resolutions">
+                                <option value="500x500">500 × 500 (1:1 Square)</option>
+                                <option value="1024x1024">1024 × 1024 (1:1 Square)</option>
+                                <option value="1280x1280">1280 x 1280 (1:1 Square)</option>
+                                <option value="1280x720">1280 × 720 (16:9 HD)</option>
+                                <option value="720x1280">720 × 1280(9:16 HD)</option>
+                                <option value="1704x1704">1704 × 1704 </option>
+                                <option value="1024x768">1024 × 768 (4:3 Traditional)</option>
+                                <option value="768x1024"> 768 × 1024 (4:3 Traditional)</option>
+                                <option value="1600x1048">1568 × 1048 </option>
+                            </optgroup>
+
+                            <!-- Social Media Image Sizes -->
+                            <optgroup label="📱 Social Media Sizes">
+                                <option value="320x320">320 × 320 (Instagram Profile)</option>
+                                <option value="1080x1080">1080 × 1080 (Instagram Square Post)</option>
+                                <option value="1080x1350">1080 × 1350 (Instagram Portrait Post)</option>
+                                <option value="1080x566">1080 × 566 (Instagram Landscape Post)</option>
+                                <option value="820x312">820 × 312 (Facebook Cover Photo)</option>
+                                <option value="170x170">170 × 170 (Facebook Profile)</option>
+                                <option value="1500x500">1500 × 500 (Twitter Header)</option>
+                                <option value="400x400">400 × 400 (Twitter Profile)</option>
+                                <option value="1280x720">1280 × 720 (YouTube Thumbnail)</option>
+                                <option value="1584x396">1584 × 396 (LinkedIn Banner)</option>
+                            </optgroup>
+
+                        </select>
+                    </div>
+
+                    <!-- Hidden Inputs to Store Selected Values -->
+                    <input type="hidden" id="width" th:field="*{width}" />
+                    <input type="hidden" id="height" th:field="*{height}" />
+
+
+                    <button type="submit"
+                        class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Generate
+                        Image</button>
+                </form>
+            </div>
+
+            <!-- Image Gallery -->
+            <h3 class="text-lg font-semibold mb-4">Your Generated Images</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div th:each="image : ${images}" class="image-card bg-white rounded-lg shadow overflow-hidden">
+                    <img th:src="${image.cloudinaryUrl}" class="w-full h-48 object-cover cursor-pointer"
+                        alt="Generated Image" data-modal-target="image-details-modal"
+                        data-modal-toggle="image-details-modal"
+                        th:attr="data-prompt=${image.prompt}, data-model=${image.model}, data-width=${image.width}, data-height=${image.height}, data-image-url=${image.cloudinaryUrl}"
+                        onclick="showImageDetails(this)" />
+
+                    <div class="p-4">
+                        <p class="text-sm text-gray-600" th:text="${image.prompt}"></p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- Image Details Modal -->
+        <div id="image-details-modal" tabindex="-1" aria-hidden="true"
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-2xl max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div
+                        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                            Image Details
+                        </h3>
+                        <button type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-hide="image-details-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-4 md:p-5 space-y-4">
+                        <img id="modal-image" src="" class="w-full max-h-[50vh] object-contain" alt="Full-size Image" />
+                        <div class="space-y-2">
+                            <!-- <a th:href="${image.cloudinaryUrl+ '?fl_attachment'}" download >
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3"/>
+                            </svg>
+                        </a> -->
+                            <p class="text-base text-gray-500 dark:text-gray-400">
+                                <strong>Prompt:</strong> <span id="modal-prompt"></span>
+                            </p>
+                            <p class="text-base text-gray-500 dark:text-gray-400">
+                                <strong>Model:</strong> <span id="modal-model"></span>
+                            </p>
+                            <p class="text-base text-gray-500 dark:text-gray-400">
+                                <strong>Width:</strong> <span id="modal-width"></span>
+                            </p>
+                            <p class="text-base text-gray-500 dark:text-gray-400">
+                                <strong>Height:</strong> <span id="modal-height"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <script th:src="@{/JS/viewImage.js}"></script>
+</body>
+
+</html>

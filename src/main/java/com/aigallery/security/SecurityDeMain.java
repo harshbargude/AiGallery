@@ -54,8 +54,7 @@ public class SecurityDeMain {
                                                                 "/contact",
                                                                 "/images/**")
                                                 .permitAll() // Allow static resources
-                                                .requestMatchers(HttpMethod.GET, "/aigallery/user/**").hasRole("USER")
-                                                .requestMatchers(HttpMethod.POST, "/aigallery/user/**").hasRole("USER")
+                                                .requestMatchers("/aigallery/user/**").hasRole("USER")
                                                 .anyRequest()
                                                 .authenticated())
                                 .formLogin(form -> form

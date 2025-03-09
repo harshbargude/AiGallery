@@ -37,7 +37,35 @@ public class UserImageGenerationController {
         model.addAttribute("user", user);
         model.addAttribute("images", imageRepository.findByUserOrderByIdDesc(user));
         model.addAttribute("imageRequest", new GeneratedImage());
-        return "user/userDashboard";
+        return "user/profile";
+    }
+
+    @GetMapping("/dashboard")
+    public String getDashboard(Model model) {
+        User user = userRepository.findByEmail(
+            SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("user", user);
+        model.addAttribute("images", imageRepository.findByUserOrderByIdDesc(user));
+        model.addAttribute("imageRequest", new GeneratedImage());
+        return "user/dashboard";
+    }
+
+    @GetMapping("/profile")
+    public String getProfile(Model model) {
+        User user = userRepository.findByEmail(
+            SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("user", user);
+        return "user/profile";
+    }
+
+    @GetMapping("/generate")
+    public String getGenerateImage(Model model) {
+        User user = userRepository.findByEmail(
+            SecurityContextHolder.getContext().getAuthentication().getName());
+        // model.addAttribute("user", user);
+        model.addAttribute("images", imageRepository.findByUserOrderByIdDesc(user));
+        model.addAttribute("imageRequest", new GeneratedImage());
+        return "user/generate_image";
     }
 
     @PostMapping("/generate")
@@ -64,7 +92,7 @@ public class UserImageGenerationController {
         generatedImage.setUser(user);
         
         imageRepository.save(generatedImage);
-        return "redirect:/aigallery/user";
+        return "redirect:/aigallery/user/generate";
     }
     
 }
