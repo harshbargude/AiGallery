@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Generated Images</title>
+</head>
+
+<body>
+    <div class="parent-fragment h-screen" id="content">
+        <div>
+            <div sec:authorize="isAuthenticated()">
+                <div data-th-replace="~{user/sidebar :: f-sidebar}"></div>
+            </div>
+        </div>
+        
+        <!-- Image Gallery -->
+        <h1 class="text-4xl block text-center ml-auto font-semibold mb-4">Your Generated Images</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div th:each="image : ${images}" class="image-card bg-white rounded-lg shadow overflow-hidden">
+                <img th:src="${image.cloudinaryUrl}" class="w-full h-48 object-cover cursor-pointer"
+                    alt="Generated Image" data-modal-target="image-details-modal"
+                    data-modal-toggle="image-details-modal"
+                    th:attr="data-prompt=${image.prompt}, data-model=${image.model}, data-width=${image.width}, data-height=${image.height}, data-image-url=${image.cloudinaryUrl}"
+                    onclick="showImageDetails(this)" />
+
+                <div class="p-4">
+                    <p class="text-sm text-gray-600" th:text="${image.prompt}"></p>
+                </div>
+
+            </div>
+
+            <!-- Image Details Modal -->
+    <div id="image-details-modal" tabindex="-1" aria-hidden="true"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div
+                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Image Details
+                </h3>
+                <button type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-hide="image-details-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5 space-y-4">
+                <img id="modal-image" src="" class="w-full max-h-[50vh] object-contain" alt="Full-size Image" />
+                <div class="space-y-2">
+                    <!-- <a th:href="${image.cloudinaryUrl+ '?fl_attachment'}" download >
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3"/>
+                        </svg>
+                    </a> -->
+                    <p class="text-base text-gray-500 dark:text-gray-400">
+                        <strong>Prompt:</strong> <span id="modal-prompt"></span>
+                    </p>
+                    <p class="text-base text-gray-500 dark:text-gray-400">
+                        <strong>Model:</strong> <span id="modal-model"></span>
+                    </p>
+                    <p class="text-base text-gray-500 dark:text-gray-400">
+                        <strong>Width:</strong> <span id="modal-width"></span>
+                    </p>
+                    <p class="text-base text-gray-500 dark:text-gray-400">
+                        <strong>Height:</strong> <span id="modal-height"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+
+    </div>
+    <script>
+        console.log("Dashboard haaa!")
+    </script>
+    <script th:src="@{/JS/viewImage.js}"></script>
+</body>
+
+</html>

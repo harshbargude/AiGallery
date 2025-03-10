@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
-      xmlns:th="http://www.w3.org/1999/xhtml">
+    xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Dashboard</title>
 </head>
 
 <body>
-    <div class="parent-fragment h-screen" id="content">
+    <div class="parent-fragment h-screen pl-3" id="content">
         <div>
             <div sec:authorize="isAuthenticated()">
                 <div data-th-replace="~{user/sidebar :: f-sidebar}"></div>
             </div>
         </div>
-        <h1>This is Dashboard Page</h1>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil labore minima est deserunt fugiat! Quia quisquam exercitationem enim natus eligendi quidem voluptatum molestias!</p>
+
+        <div
+            class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total Number of Image
+                Generated</h5>
+            <p class="text-6xl text-center text-gray-700 dark:text-gray-400" th:text="${numberOfImages}">0</p>
+            <div class="text-center pt-5">
+                <a th:href="@{/aigallery/user/generate}"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Generate Image</a>
+            </div>
+        </div>
+
+
     </div>
     <script>
         console.log("Dashboard haaa!")

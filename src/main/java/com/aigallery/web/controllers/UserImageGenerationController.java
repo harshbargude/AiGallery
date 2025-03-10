@@ -2,6 +2,7 @@ package com.aigallery.web.controllers;
 
 import java.io.IOException;
 
+import java.util.List;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,9 +45,9 @@ public class UserImageGenerationController {
     public String getDashboard(Model model) {
         User user = userRepository.findByEmail(
             SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("user", user);
-        model.addAttribute("images", imageRepository.findByUserOrderByIdDesc(user));
-        model.addAttribute("imageRequest", new GeneratedImage());
+        List<GeneratedImage> images = imageRepository.findByUser(user);   
+        int totalImages = images.size(); 
+        model.addAttribute("numberOfImages", totalImages);
         return "user/dashboard";
     }
 
@@ -67,6 +68,19 @@ public class UserImageGenerationController {
         model.addAttribute("imageRequest", new GeneratedImage());
         return "user/generate_image";
     }
+
+    @GetMapping("/generated-images")
+    public String getGeneratedImages(Model model) {
+        User user = userRepository.findByEmail(
+            SecurityContextHolder.getContext().getAuthentication().getName());
+        // model.addAttribute("user", user);
+        model.addAttribute("images", imageRepository.findByUserOrderByIdDesc(user));
+        model.addAttribute("imageRequest", new GeneratedImage());
+        return "user/generated-images";
+    }
+
+
+
 
     @PostMapping("/generate")
     public String generateImage(@ModelAttribute GeneratedImage imageRequest) throws IOException {
