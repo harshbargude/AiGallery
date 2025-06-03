@@ -36,3 +36,5 @@ build/
 .env
 /src/main/resources/application-prod.properties
 /node_modules
+
+src/main/resources/application.properties

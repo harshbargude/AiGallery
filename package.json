@@ -15,6 +15,7 @@
     },
     "dependencies": {
         "flowbite": "^2.5.2",
+        "micromanagement": "file:",
         "sweetalert2": "^11.14.5"
     }
 }
