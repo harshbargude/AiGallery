@@ -18,6 +18,7 @@ target/
 *.iws
 *.iml
 *.ipr
+*.log
 
 ### NetBeans ###
 /nbproject/private/
@@ -32,9 +33,11 @@ build/
 ### VS Code ###
 .vscode/
 
+target/
 .properties
 .env
 /src/main/resources/application-prod.properties
 /node_modules
 
 src/main/resources/application.properties
+package-lock.json
