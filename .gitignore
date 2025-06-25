@@ -41,3 +41,6 @@ target/
 
 src/main/resources/application.properties
 package-lock.json
+
+.gitignore
+.gitattributes
